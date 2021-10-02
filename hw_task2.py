@@ -73,20 +73,80 @@ for var_el in range(var_str.count(' ') + 1):
 # Пользователь ввел число 1. Результат: 7, 5, 3, 3, 2, 1.
 # Набор натуральных чисел можно задать непосредственно в коде,
 # например, my_list = [7, 5, 3, 3, 2].
-var_list = [7, 5, 3, 3, 2]
-number = int(input('Enter new number'))
-el = None
+var_list = []
 
-# var_list.append(number)
-# new_list = sorted(var_list, reverse=True)
-# print(f'New list {new_list}')
-
-for ind, num in enumerate(var_list):
-    if number > num:
-        el = ind
+while True:
+    el = int(input('Enter new number: '))
+    if el <= 0:
         break
-if el is None:
-    var_list.append(number)
-else:
-    var_list.insert(el, number)
+    if len(var_list) > 0:
+        if el <= var_list[-1]:
+            var_list.append(el)
+            print(var_list)
+        else:
+            for ind in range(len(var_list)):
+                if el >= var_list[ind]:
+                    var_list.insert(ind, el)
+                    print(var_list)
+                    break
+    else:
+        var_list.append(el)
+        print(var_list)
+print(var_list)
 print(f'New list {var_list}')
+
+# 6. * Реализовать структуру данных «Товары». Она должна представлять
+# собой список кортежей. Каждый кортеж хранит информацию об отдельном товаре.
+# В кортеже должно быть два элемента — номер товара и словарь с параметрами
+# (характеристиками товара: название, цена, количество, единица измерения).
+# Структуру нужно сформировать программно, т.е. запрашивать все данные у пользователя.
+# Пример готовой структуры:
+# [
+# (1, {“название”: “компьютер”, “цена”: 20000, “количество”: 5, “eд”: “шт.”}),
+# (2, {“название”: “принтер”, “цена”: 6000, “количество”: 2, “eд”: “шт.”}),
+# (3, {“название”: “сканер”, “цена”: 2000, “количество”: 7, “eд”: “шт.”})
+# ]
+# Необходимо собрать аналитику о товарах. Реализовать словарь, в котором каждый
+# ключ — характеристика товара, например название, а значение — список значений-характеристик,
+# например список названий товаров.
+# Пример:
+# {
+# “название”: [“компьютер”, “принтер”, “сканер”],
+# “цена”: [20000, 6000, 2000],
+# “количество”: [5, 2, 7],
+# “ед”: [“шт.”]
+# }
+products = []
+analitics = {'Name': [], 'Price': [], 'Count': [], 'Units': []}
+
+num = 1
+while True:
+    if input("You want to add product? (enter y/n)").lower() == 'y':
+        name = input('Name: ')
+        price = input('Price: ')
+        count = input('Count: ')
+        units = input('Units: ')
+
+        products.append((num, {'Name': name, 'Price': price, 'Count': count, 'Units': units}))
+        num += 1
+    else:
+        break
+
+for item in products:
+    tmp_name_list = analitics['Name']
+    tmp_name_list.append(item[1]['Name'])
+    analitics['Name'] = list(set(tmp_name_list))
+
+    tmp_price_list = analitics['Price']
+    tmp_price_list.append(item[1]['Price'])
+    analitics['Price'] = list(set(tmp_price_list))
+
+    tmp_count_list = analitics['Count']
+    tmp_count_list.append(item[1]['Count'])
+    analitics['Count'] = list(set(tmp_count_list))
+
+    tmp_units_list = analitics['Units']
+    tmp_units_list.append(item[1]['Units'])
+    analitics['Units'] = list(set(tmp_units_list))
+
+print(f'Analytics {analitics}')
