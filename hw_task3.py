@@ -37,20 +37,16 @@ print(data_user(name=var_name, surname=var_surname, year=var_year, city=var_city
 # и возвращает сумму наибольших двух аргументов.
 
 
-def my_func():
-    arg1 = float(input("Enter arg1: "))
-    arg2 = float(input("Enter arg2: "))
-    arg3 = float(input("Enter arg3: "))
-
-    if arg1 >= arg3 and arg2 >= arg3:
-        return arg1 + arg2
-    elif arg3 >= arg1 >= arg2:
-        return arg1 + arg3
-    else:
-        return arg2 + arg3
+def my_func(arg1, arg2, arg3):
+    return sum(sorted([arg1, arg2, arg3], reverse=True)[:2])
 
 
-print(my_func())
+def my_func2(*args):
+    return sum(sorted(list(args), reverse=True)[:2])
+
+
+print(my_func(19, 2, 1))
+print(my_func2(1, 2, 19))
 #
 # 4. Программа принимает действительное положительное число x и целое отрицательное
 # число y. Необходимо выполнить возведение числа x в степень y. Задание необходимо
