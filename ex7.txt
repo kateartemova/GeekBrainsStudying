@@ -1,0 +1,5 @@
+firm_1 OOO 1000 500
+firm_2 ZAO 1500 300
+firm_3 OOO 700 800
+firm_4 ODO 2000 1200
+firm_5 ZAO 5000 950
