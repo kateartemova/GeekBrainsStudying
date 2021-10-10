@@ -1,0 +1,5 @@
+Math: 40(l) 50(pr) 20(lab)
+History: 30(l) — 10(lab)
+Chemistry: — 30(pr) —
+Astronomy: - - 10(lab)
+Physics: 40(l) - -

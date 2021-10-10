@@ -1,0 +1,7 @@
+Ivanov 18000
+Kolin 100000
+Petrov 20000
+Abramov 10000
+Sidorov 25000
+Baranob 16000
+Mamov 76000

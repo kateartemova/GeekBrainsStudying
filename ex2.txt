@@ -1,0 +1,3 @@
+It's my file
+Here I write something for exercise 2
+I need to count rows and words in this file
