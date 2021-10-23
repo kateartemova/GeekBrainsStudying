@@ -98,3 +98,31 @@ while True:
         print(f'{err} - it is not number')
 print(my_list)
 #
+# 7. Реализовать проект «Операции с комплексными числами». Создайте класс
+# «Комплексное число», реализуйте перегрузку методов сложения и умножения комплексных
+# чисел. Проверьте работу проекта, создав экземпляры класса (комплексные числа) и
+# выполнив сложение и умножение созданных экземпляров. Проверьте корректность
+# полученного результата.
+
+
+class ComplexNumber:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.z = 'x + i*y'
+
+    def __add__(self, other):
+        return ComplexNumber(self.x + other.x, self.y + other.y)
+
+    def __mul__(self, other):
+        return ComplexNumber(self.x * other.x - self.y * other.y, self.x * other.y + other.x * self.y)
+
+    def __str__(self):
+        return f'z = {self.x} + i*{self.y}'
+
+
+a = ComplexNumber(2, 3)
+b = ComplexNumber(5, -4)
+print(a)
+print(a + b)
+print(a * b)
