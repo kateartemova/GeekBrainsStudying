@@ -112,8 +112,95 @@ print(my_list)
 # склад, нельзя использовать строковый тип данных.
 # Подсказка: постарайтесь по возможности реализовать в проекте «Склад оргтехники»
 # максимум возможностей, изученных на уроках по ООП.
-#
-# TBD
+
+
+class StoreOfficeEquipment:
+    def __init__(self, store_num):
+        self.store_num = store_num
+        self.accept_lists = {}
+        self.give_out_lists = {}
+
+    def to_accept(self, equipment):
+        self.accept_lists.update({equipment.name: [equipment.price, equipment.quantity, equipment.serial_number]})
+        print(f'Accept equipment: {self.store_num} {equipment.name} {equipment.price} '
+              f'{equipment.quantity} {str(equipment.serial_number)}')
+
+    def to_give_out(self, equipment, other):
+        self.give_out_lists.update({equipment.name: [equipment.price, equipment.quantity, equipment.serial_number]})
+        print(f'Give out equipment: {self.store_num} {equipment.name} {equipment.price} '
+              f'{equipment.quantity} {str(equipment.serial_number)}')
+        other.to_accept(equipment)
+
+    def list_equipments(self):
+        print(f'Accepted at the warehouse {len(self.accept_lists)} position:\n{self.accept_lists}')
+        print(f'Gived out from the warehouse {len(self.give_out_lists)} position:\n{self.give_out_lists}')
+
+
+class OfficeEquipment:
+    def __init__(self, name, price, quantity, serial_number):
+        self.name = name
+        self.quantity = quantity
+        self.serial_number = serial_number
+        if price <= 0:
+            raise ValueError('Wrong price')
+        else:
+            self.price = price
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Printer(OfficeEquipment):
+    def __init__(self, name, price, quantity, serial_number, print_speed):
+        super().__init__(name, price, quantity, serial_number)
+        OfficeEquipment.__init__(self, name, price, quantity, serial_number)
+        self.print_speed = print_speed
+
+    def __str__(self):
+        return 'Model: ' + OfficeEquipment.__str__(self) + ' Print speed: ' + str(self.print_speed)
+
+
+class Scanner(OfficeEquipment):
+    def __init__(self, name, price, quantity, serial_number, resolution):
+        OfficeEquipment.__init__(self, name, price, quantity, serial_number)
+        self.resolution = resolution
+
+    def __str__(self):
+        return 'Model: ' + OfficeEquipment.__str__(self) + ' Resolution: ' + str(self.resolution)
+
+
+class Copier(OfficeEquipment):
+    def __init__(self, name, price, quantity, serial_number, color_printing):
+        OfficeEquipment.__init__(self, name, price, quantity, serial_number)
+        self.color_printing = color_printing
+
+    def __str__(self):
+        return 'Model: ' + OfficeEquipment.__str__(self) + ' Color printing: ' + str(self.color_printing)
+
+
+store1 = StoreOfficeEquipment('Store 1')
+store2 = StoreOfficeEquipment('Store 2')
+pr_1 = Printer('HP', 150, 20, 12345, '80–100 мм/с')
+pr_2 = Printer('HP', 130, 20, 54321, '150 мм/с')
+sc_1 = Scanner('Canon', 200, 10, 23456, '600 dpi')
+c_1 = Copier('Xerox', 1000, 2, 34567, 'black-white')
+
+print(pr_1)
+print(pr_2)
+print(sc_1)
+print(c_1)
+print('--------------------')
+store1.to_accept(pr_1)
+store2.to_accept(pr_2)
+store1.to_accept(sc_1)
+store2.to_accept(c_1)
+print('--------------------')
+store1.to_give_out(sc_1, store2)
+store2.to_give_out(c_1, store1)
+print('--------------------')
+store1.list_equipments()
+print('--------------------')
+store2.list_equipments()
 #
 # 7. Реализовать проект «Операции с комплексными числами». Создайте класс
 # «Комплексное число», реализуйте перегрузку методов сложения и умножения комплексных
